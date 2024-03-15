@@ -35,7 +35,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
  */
 final class UserControllerTest extends WebTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /**
      * @dataProvider getUrlsForAnonymousUsers

@@ -8,7 +8,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 
 class ApplicationAvailabilityTest extends WebTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /**
      * @dataProvider urlProvider
@@ -23,7 +24,7 @@ class ApplicationAvailabilityTest extends WebTestCase
 
     public static function urlProvider(): \Generator
     {
-        yield ["homepage" => '/'];
+        yield ['homepage' => '/'];
         yield ['/en'];
         yield ['/en/blog/'];
         yield ['/en/login'];
@@ -42,17 +43,15 @@ class ApplicationAvailabilityTest extends WebTestCase
         $this->assertResponseRedirects('/en/login');
     }
 
-    public static  function urlProviderAdmin(): \Generator
+    public static function urlProviderAdmin(): \Generator
     {
         yield ['admin_post_index' => '/en/admin/post/'];
         yield ['admin_post_new' => '/en/admin/post/new'];
     }
 
-    public static  function urlProviderUser(): \Generator
+    public static function urlProviderUser(): \Generator
     {
         yield ['user_edit' => '/en/profile/edit'];
         yield ['user_change_password' => '/en/profile/change-password'];
     }
-
-
 }

@@ -30,7 +30,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
  */
 final class BlogControllerTest extends WebTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     public function testIndex(): void
     {

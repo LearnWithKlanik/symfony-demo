@@ -30,7 +30,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
  */
 final class DefaultControllerTest extends WebTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /**
      * PHPUnit's data providers allow to execute the same tests repeated times
