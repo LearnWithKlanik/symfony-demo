@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Controller\Admin;
+namespace App\Tests\Functional\Controller\Admin;
 
 use App\Entity\User;
 use App\Repository\PostRepository;
@@ -17,6 +17,8 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * Functional test for the controllers defined inside the BlogController used
@@ -35,6 +37,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BlogControllerTest extends WebTestCase
 {
+    use Factories, ResetDatabase;
+
     private KernelBrowser $client;
 
     protected function setUp(): void

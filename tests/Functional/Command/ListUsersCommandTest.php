@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Command;
+namespace App\Tests\Functional\Command;
 
 use App\Command\ListUsersCommand;
 
-final class ListUsersCommandTest extends AbstractCommandTest
+final class ListUsersCommandTest extends AbstractCommand
 {
     /**
      * @dataProvider maxResultsProvider
