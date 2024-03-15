@@ -29,11 +29,10 @@
 phpstan.neon
 ###< phpstan/phpstan ###
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
-
 ###> symfony/panther ###
 drivers/
 ###< symfony/panther ###
+
+###> tools/phive ###
+tools/
+###< tools/phive ###
