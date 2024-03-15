@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Controller;
+namespace App\Tests\Functional\Controller;
 
 use App\Entity\User;
 use App\Pagination\Paginator;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * Functional test for the controllers defined inside BlogController.
@@ -28,6 +30,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 final class BlogControllerTest extends WebTestCase
 {
+    use Factories, ResetDatabase;
+
     public function testIndex(): void
     {
         $client = static::createClient();
@@ -93,10 +97,10 @@ final class BlogControllerTest extends WebTestCase
     public function testAjaxSearch(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/en/blog/search', ['q' => 'lorem']);
+        $crawler = $client->request('GET', '/en/blog/search', ['q' => 'risus']);
 
         $this->assertResponseIsSuccessful();
-        $this->assertCount(1, $crawler->filter('article.post'));
-        $this->assertSame('Lorem ipsum dolor sit amet consectetur adipiscing elit', $crawler->filter('article.post')->first()->filter('h2 > a')->text());
+        $this->assertCount(4, $crawler->filter('article.post'));
+        $this->assertSame('Mauris dapibus risus quis suscipit vulputate', $crawler->filter('article.post')->first()->filter('h2 > a')->text());
     }
 }

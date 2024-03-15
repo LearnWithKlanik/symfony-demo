@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Command;
+namespace App\Tests\Functional\Command;
 
 use App\Command\AddUserCommand;
 use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final class AddUserCommandTest extends AbstractCommandTest
+final class AddUserCommandTest extends AbstractCommand
 {
     /**
      * @var string[]

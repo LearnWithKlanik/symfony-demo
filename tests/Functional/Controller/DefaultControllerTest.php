@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Controller;
+namespace App\Tests\Functional\Controller;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * Functional test that implements a "smoke test" of all the public and secure
@@ -28,6 +30,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class DefaultControllerTest extends WebTestCase
 {
+    use Factories, ResetDatabase;
+
     /**
      * PHPUnit's data providers allow to execute the same tests repeated times
      * using a different set of data each time.

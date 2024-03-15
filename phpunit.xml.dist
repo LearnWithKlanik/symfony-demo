@@ -7,14 +7,18 @@
          colors="true"
          bootstrap="tests/bootstrap.php"
          convertDeprecationsToExceptions="false"
+         cacheResultFile="./var/cache/.phpunit.result.cache"
 >
     <php>
         <ini name="display_errors" value="1" />
         <ini name="error_reporting" value="-1" />
+        <ini name="memory_limit" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9.6" />
+        <env name="SYMFONY_PHPUNIT_LOCALE" value="fr_FR"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
     </php>
 
     <testsuites>
@@ -27,6 +31,10 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">src/DataFixtures</directory>
+            <directory suffix=".php">src/Factory</directory>
+        </exclude>
     </coverage>
 
     <listeners>
@@ -34,11 +42,7 @@
     </listeners>
 
     <extensions>
-        <!-- it begins a database transaction before every testcase and rolls it back after
-             the test finished, so tests can manipulate the database without affecting other tests -->
         <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
-
-        <!-- Run `composer require symfony/panther` before enabling this extension -->
-        <!-- <extension class="Symfony\Component\Panther\ServerExtension" /> -->
+        <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
 </phpunit>
