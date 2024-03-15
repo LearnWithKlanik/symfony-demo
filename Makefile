@@ -48,6 +48,9 @@ ptest: ## Start tests with paratest, pass the parameter "c=" to add options to p
 	@$(eval c ?=)
 	@$(DOCKER_COMP) exec -e APP_ENV=test php vendor/bin/paratest --no-coverage $(c)
 
+e2e.debug:
+	PANTHER_NO_HEADLESS=1 ./bin/phpunit --testsuite E2E --debug
+
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
 	@$(eval c ?=)
