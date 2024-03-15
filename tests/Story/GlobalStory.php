@@ -25,10 +25,10 @@ final class GlobalStory extends Story
             $this->addState($username, UserFactory::createOne(
                 [
                     'fullname' => $fullname,
-                    'username' => $username, 
-                    'password' => $password, 
-                    'email' => $email, 
-                    'roles' => $roles
+                    'username' => $username,
+                    'password' => $password,
+                    'email' => $email,
+                    'roles' => $roles,
                 ]
             ));
         }
@@ -39,7 +39,7 @@ final class GlobalStory extends Story
         foreach ($this->getTagData() as $name) {
             $this->addState('tag-'.$name, TagFactory::createOne(
                 [
-                    'name'=> $name
+                    'name' => $name,
                 ]
             ));
         }
@@ -48,27 +48,27 @@ final class GlobalStory extends Story
     private function loadPosts(): void
     {
         foreach ($this->getPostData() as [$title, $summary, $content, $publishedAt, $author, $tags]) {
-            
             $this->addState($title, PostFactory::createOne(
                 [
-                    'title' => $title, 
-                    'summary' => $summary, 
-                    'content' => $content, 
-                    'publishedAt' => $publishedAt, 
-                    'author' => $author, 
+                    'title' => $title,
+                    'summary' => $summary,
+                    'content' => $content,
+                    'publishedAt' => $publishedAt,
+                    'author' => $author,
                     'tags' => $tags,
                 ]
             ));
 
             CommentFactory::new(
-                function($i) use ($title) {
+                function ($i) use ($title) {
                     /** @var User $commentAuthor */
                     $commentAuthor = $this->getState('john_user');
+
                     return [
                         'author' => $commentAuthor,
                         'content' => $this->getRandomText(random_int(255, 512)),
                         'publishedAt' => new \DateTime('now + '.$i.'seconds'),
-                        'post' => $this->getState($title)
+                        'post' => $this->getState($title),
                     ];
                 }
             )->many(1, 5);

@@ -86,7 +86,7 @@ cc: sf
 
 ## —— Tools  ——————————————————————————————————————————————————————————————————
 cs-fix: 
-	docker run --rm -v $(PWD):/code ghcr.io/php-cs-fixer/php-cs-fixer:3-php8.3 fix src
+	docker run --rm -v $(PWD):/code ghcr.io/php-cs-fixer/php-cs-fixer:3-php8.3 fix
 
 phive: ## Run phive, pass the parameter "c=" to run a given command, example: make phive c='infection'
 	@$(eval c ?=)

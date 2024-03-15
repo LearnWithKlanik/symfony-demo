@@ -37,7 +37,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
  */
 class BlogControllerTest extends WebTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     private KernelBrowser $client;
 

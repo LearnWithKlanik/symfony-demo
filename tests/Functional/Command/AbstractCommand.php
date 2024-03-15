@@ -18,7 +18,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 abstract class AbstractCommand extends KernelTestCase
 {
-
     /**
      * This helper method abstracts the boilerplate code needed to test the
      * execution of a command.
