@@ -48,9 +48,6 @@ ptest: ## Start tests with paratest, pass the parameter "c=" to add options to p
 	@$(eval c ?=)
 	@$(DOCKER_COMP) exec -e APP_ENV=test php vendor/bin/paratest --no-coverage $(c)
 
-infection: ## Start infection
-	@$(DOCKER_COMP) infection --threads=max
-
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
 	@$(eval c ?=)
@@ -100,4 +97,4 @@ drivers: ## For symfony/panther
 
 infection: ## Run infection, pass the parameter "c=" to run a given command, example: make infection c='--help'
 	@$(eval c ?=)
-	@$(PHP_CONT) tools/infection
+	@$(PHP_CONT) tools/infection --threads=max
