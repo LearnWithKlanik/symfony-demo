@@ -90,8 +90,14 @@ cc: sf
 ## —— Tools  ——————————————————————————————————————————————————————————————————
 cs-fix: 
 	docker run --rm -v $(PWD):/code ghcr.io/php-cs-fixer/php-cs-fixer:3-php8.3 fix src
+
 phive: ## Run phive, pass the parameter "c=" to run a given command, example: make phive c='infection'
 	@$(eval c ?=)
 	docker run -it --rm -v $(PWD):/repo phario/phive:0.15.2 install --copy $(c)
+
 drivers: ## For symfony/panther
 	@$(PHP_CONT) vendor/bin/bdi detect drivers
+
+infection: ## Run infection, pass the parameter "c=" to run a given command, example: make infection c='--help'
+	@$(eval c ?=)
+	@$(PHP_CONT) tools/infection
