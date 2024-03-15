@@ -18,6 +18,7 @@ use App\Event\CommentCreatedEvent;
 use App\Form\CommentType;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
+use App\Service\SpamChecker;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -109,6 +110,7 @@ final class BlogController extends AbstractController
         #[MapEntity(mapping: ['postSlug' => 'slug'])] Post $post,
         EventDispatcherInterface $eventDispatcher,
         EntityManagerInterface $entityManager,
+        SpamChecker $spamChecker,
     ): Response {
         $comment = new Comment();
         $comment->setAuthor($user);
@@ -119,6 +121,18 @@ final class BlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($comment);
+
+            $context = [
+                'user_ip' => $request->getClientIp(),
+                'user_agent' => $request->headers->get('user-agent'),
+                'referrer' => $request->headers->get('referer'),
+                'permalink' => $request->getUri(),
+            ];
+
+            if (1 === $spamChecker->getSpamScore($comment, $context)) {
+                throw new \RuntimeException('Blatant spam, go away!');
+            }
+
             $entityManager->flush();
 
             // When an event is dispatched, Symfony notifies it to all the listeners
