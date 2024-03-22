@@ -50,19 +50,19 @@ class SpamCheckerTest extends TestCase
 
     public static function provideComments(): iterable
     {
-            $comment = new Comment();
-            $comment->setAuthor(new User());
-            $context = [];
+        $comment = new Comment();
+        $comment->setAuthor(new User());
+        $context = [];
 
-            $response = new MockResponse('', ['response_headers' => ['x-akismet-pro-tip: discard']]);
-            yield 'blatant_spam' => [2, $response, $comment, $context];
+        $response = new MockResponse('', ['response_headers' => ['x-akismet-pro-tip: discard']]);
+        yield 'blatant_spam' => [2, $response, $comment, $context];
 
-            $response = new MockResponse('true');
-            yield 'spam' => [1, $response, $comment, $context];
+        $response = new MockResponse('true');
+        yield 'spam' => [1, $response, $comment, $context];
 
-            $response = new MockResponse('false');
-            yield 'ham' => [0, $response, $comment, $context];
-        }
+        $response = new MockResponse('false');
+        yield 'ham' => [0, $response, $comment, $context];
+    }
 
     private function getLocaleSwitcherStub($locale = 'en')
     {

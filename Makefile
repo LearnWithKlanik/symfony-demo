@@ -42,11 +42,19 @@ sh: ## Connect to the FrankenPHP container
 
 test: ## Start tests with phpunit, pass the parameter "c=" to add options to phpunit, example: make test c="--group e2e --stop-on-failure"
 	@$(eval c ?=)
-	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/phpunit --no-coverage $(c)
+	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/phpunit --no-coverage --testsuite Tests $(c)
+
+coverage:
+	@$(eval c ?=)
+	@$(DOCKER_COMP) exec -e APP_ENV=test -e XDEBUG_MODE=coverage php bin/phpunit $(c) --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml --coverage-html=build/coverage/html
 
 ptest: ## Start tests with paratest, pass the parameter "c=" to add options to paratest
 	@$(eval c ?=)
-	@$(DOCKER_COMP) exec -e APP_ENV=test php vendor/bin/paratest --no-coverage $(c)
+	@$(DOCKER_COMP) exec -e APP_ENV=test php vendor/bin/paratest --processes=8 --no-coverage --testsuite Tests $(c)
+
+e2e:
+	@$(eval c ?=)
+	@$(DOCKER_COMP) exec -e APP_ENV=test php vendor/bin/phpunit $(c) --testsuite E2E
 
 e2e.debug:
 	PANTHER_NO_HEADLESS=1 ./bin/phpunit --testsuite E2E --debug

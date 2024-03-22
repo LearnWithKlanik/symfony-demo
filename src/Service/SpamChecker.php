@@ -20,13 +20,12 @@ class SpamChecker
     }
 
     /**
-     * @return int Spam score: 0: not spam, 1: maybe spam, 2: blatant spam
-     *
      * @throws \RuntimeException if the call did not work
+     *
+     * @return int Spam score: 0: not spam, 1: maybe spam, 2: blatant spam
      */
     public function getSpamScore(Comment $comment, array $context): int
     {
-
         $response = $this->client->request('POST', $this->endpoint, [
             'body' => array_merge($context, [
                 'blog' => 'https://guestbook.example.com',

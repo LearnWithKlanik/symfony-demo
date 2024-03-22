@@ -12,9 +12,14 @@
 namespace App\Tests\Functional\Command;
 
 use App\Command\ListUsersCommand;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class ListUsersCommandTest extends AbstractCommand
 {
+    use Factories;
+    use ResetDatabase;
+
     /**
      * @dataProvider maxResultsProvider
      *

@@ -14,9 +14,14 @@ namespace App\Tests\Functional\Command;
 use App\Command\AddUserCommand;
 use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class AddUserCommandTest extends AbstractCommand
 {
+    use Factories;
+    use ResetDatabase;
+
     /**
      * @var string[]
      */
